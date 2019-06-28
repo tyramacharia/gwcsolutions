@@ -258,3 +258,25 @@ def makyra_filter(image):
     new_img = Image.new("RGB", image.size)
     new_img.putdata(new_pixels)
     return new_img
+
+def ebony_filter(img):
+    pixels = img.getdata()
+    new_pixels = []
+    dark_blue = (0, 70, 65)
+    red = (0, 0, 0)
+    light_blue = (112, 150, 158)
+    yellow = (252, 227, 116)
+    for p in pixels:
+        intensity = p[0] + p[1] + p[2]
+        if intensity < 182:
+            new_pixels.append(dark_blue)
+        elif intensity >= 182 and intensity < 364:
+            new_pixels.append(red)
+        elif intensity >= 364 and intensity < 546:
+            new_pixels.append(light_blue)
+        elif intensity >= 546:
+            new_pixels.append(yellow)
+
+    new_img = Image.new("RGB", img.size)
+    new_img.putdata(new_pixels)
+    return new_img
