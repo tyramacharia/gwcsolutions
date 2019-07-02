@@ -3,7 +3,7 @@ from textblob import TextBlob
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-def get_filtered_dictionary(tweet_blob):
+def get_filtered_dictionary(tweet_blob): #this function will take a text blob and create a filtered dictionary of valid words
     words_to_filter = ["about", "https", "in", "the", "thing", "will", "could", "automation"]
     filtered_dictionary = dict()
 
@@ -21,16 +21,20 @@ def get_filtered_dictionary(tweet_blob):
 
     return filtered_dictionary
 
+#open, load the close the file
 tweet_file = open("twitter_data.json", "r")
 tweet_data = json.load(tweet_file)
 tweet_file.close()
 
+#create one large string of the texts of every tweet
 combined_tweets = ""
 for tweet in tweet_data:
 	combined_tweets += tweet['text']
 
+#save the combined tweets string as a textblob
 tweet_blob = TextBlob(combined_tweets)
 
+#create a new word cloud from filtered dictionary
 word_cloud = WordCloud().generate_from_frequencies(get_filtered_dictionary(tweet_blob))
 plt.imshow(word_cloud, interpolation='bilinear')
 plt.axis("off")
