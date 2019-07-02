@@ -21,7 +21,7 @@ def get_filtered_dictionary(tweet_blob): #this function will take a text blob an
 
     return filtered_dictionary
 
-#open, load the close the file
+#open, load, then close the json file
 tweet_file = open("twitter_data.json", "r")
 tweet_data = json.load(tweet_file)
 tweet_file.close()
